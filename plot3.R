@@ -1,0 +1,10 @@
+Sys.setlocale("LC_TIME", "English")
+da<-read.table("household_power_consumption_clean.txt", header=TRUE) ##read data
+c<-as.Date(da$Date, format='%d.%m.%Y')
+comb<-as.POSIXct(paste(da$Date, da$Time), format='%d.%m.%Y %H:%M:%S')
+png(filename ="plot3.png", width=480,height=480,units="px")
+plot(comb, da$Sub_metering_1, type="l", col="black",xlab="", ylab="Energy sub metering")
+lines(comb, da$Sub_metering_2, col="red")
+lines(comb, da$Sub_metering_3, col="blue")
+legend("topright", pch="-", col=c("black","red","blue"), legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+dev.off()
